@@ -1,0 +1,82 @@
+# Laravel Framework
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+
+# Compiled assets
+/public/css
+/public/js
+/public/mix-manifest.json
+
+# Laravel specific
+bootstrap/cache/*.php
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Documentation build files
+/docs/.vuepress/dist
+
+# Local development
+.vagrant/
+.phpunit.result.cache
+
+# Deployment
+.vercel
+
+# MCP and Claude configurations (keep local)
+.claude.json.backup
+.claude.json.corrupted.*
+
+# User-specific files (keep the template)
+/public/store/*/
+/public/assets/default/img/avatars/
+/public/assets/default/img/course/thumbs/
+/public/assets/default/img/newsletters/
+
+# Cache and logs
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/app/public/*
+!/storage/app/public/.gitkeep
