@@ -1,29 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "redirects": [
     {
-      "src": "public/index.php",
-      "use": "@vercel/php@0.7.1"
+      "source": "/",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "public/index.php"
-    }
-  ],
-  "env": {
-    "APP_ENV": "production",
-    "APP_DEBUG": "false",
-    "APP_KEY": "base64:BlQYTmcfZGV4XShvK5Z+ffNVWv0qszkUTRuEGmQ76lw=",
-    "APP_NAME": "Coursely LMS",
-    "LOG_CHANNEL": "errorlog",
-    "CACHE_DRIVER": "array",
-    "SESSION_DRIVER": "cookie", 
-    "QUEUE_CONNECTION": "sync",
-    "VIEW_COMPILED_PATH": "/tmp"
-  }
+  ]
 }

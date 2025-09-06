@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coursely LMS - Coming Soon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+        }
+        .github-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #24292e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .github-link:hover {
+            background: #444d56;
+            transform: translateY(-2px);
+        }
+        .note {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coursely LMS</h1>
+        <p class="subtitle">Modern Learning Management System</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>📚 Course Management</h3>
+                <p>Complete course creation and management system</p>
+            </div>
+            <div class="feature">
+                <h3>💳 Payment Integration</h3>
+                <p>30+ payment gateways including PayPal, Stripe, Razorpay</p>
+            </div>
+            <div class="feature">
+                <h3>🌐 Multi-language</h3>
+                <p>Support for multiple languages and currencies</p>
+            </div>
+            <div class="feature">
+                <h3>📱 Modern UI/UX</h3>
+                <p>Responsive design with Bootstrap 4 and custom SCSS</p>
+            </div>
+        </div>
+        
+        <a href="https://github.com/mhmalvi/coursely-lms" class="github-link">
+            🚀 View on GitHub
+        </a>
+        
+        <div class="note">
+            <strong>Note:</strong> This is a Laravel-based LMS application. For full functionality, please deploy to a proper PHP hosting service like DigitalOcean, AWS, or Laravel Forge.
+        </div>
+    </div>
+</body>
+</html>
