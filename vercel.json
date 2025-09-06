@@ -3,10 +3,13 @@
   "builds": [
     {
       "src": "public/index.php",
-      "use": "vercel-php@0.6.0"
+      "use": "@vercel/php@0.7.1"
     }
   ],
   "routes": [
+    {
+      "handle": "filesystem"
+    },
     {
       "src": "/(.*)",
       "dest": "public/index.php"
@@ -15,12 +18,12 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "https://coursely-lms.vercel.app",
-    "APP_NAME": "Coursely LMS"
-  },
-  "functions": {
-    "public/index.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
+    "APP_KEY": "base64:BlQYTmcfZGV4XShvK5Z+ffNVWv0qszkUTRuEGmQ76lw=",
+    "APP_NAME": "Coursely LMS",
+    "LOG_CHANNEL": "errorlog",
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "cookie", 
+    "QUEUE_CONNECTION": "sync",
+    "VIEW_COMPILED_PATH": "/tmp"
   }
 }
