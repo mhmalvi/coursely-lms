@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__filesystem__directory_tree",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__read_multiple_files",
+      "WebSearch",
+      "Bash(claude mcp add filesystem --scope user -- npx -y @modelcontextprotocol/server-filesystem:*)",
+      "Bash(claude mcp add git:*)",
+      "Bash(claude mcp add playwright --scope user -- npx -y @executeautomation/playwright-mcp-server:*)",
+      "Bash(claude mcp add sequential-thinking:*)",
+      "Bash(claude mcp add memory:*)",
+      "Bash(claude mcp add time:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp:*)",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
