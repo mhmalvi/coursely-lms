@@ -1,8 +1,51 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/index.html"
+  "version": 2,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.4"
+    },
+    "api/webhooks/stripe.php": {
+      "runtime": "vercel-php@0.7.4"
     }
-  ]
+  },
+  "routes": [
+    {
+      "src": "/api/webhooks/stripe",
+      "dest": "api/webhooks/stripe.php"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.php"
+    },
+    {
+      "src": "/(css|js|images|fonts|storage|assets)/(.*)",
+      "dest": "public/$1/$2"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|pdf|zip))",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "api/index.php"
+    }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false", 
+    "APP_KEY": "base64:BlQYTmcfZGV4XShvK5Z+ffNVWv0qszkUTRuEGmQ76lw=",
+    "APP_NAME": "Coursely LMS",
+    "APP_URL": "@app_url",
+    "LOG_CHANNEL": "errorlog",
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "cookie",
+    "QUEUE_CONNECTION": "sync",
+    "VIEW_COMPILED_PATH": "/tmp/views",
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_KEY": "@supabase_service_key",
+    "STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret"
+  }
 }

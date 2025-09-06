@@ -81,3 +81,4 @@ Thumbs.db
 /storage/app/public/*
 !/storage/app/public/.gitkeep
 .vercel
+.env.vercel
