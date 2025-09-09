@@ -1,5 +1,5 @@
-# Use PHP 8.1 with Apache
-FROM php:8.1-apache
+# Use PHP 7.4 with Apache (compatible with Laravel requirements)
+FROM php:7.4-apache
 
 # Set working directory
 WORKDIR /var/www/html
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     nodejs \
     npm \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip gmp \
     && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache mod_rewrite
@@ -37,8 +37,8 @@ RUN mkdir -p /var/www/html/storage/logs \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install PHP dependencies (ignore platform requirements for Docker environment)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=ext-gmp
 
 # Install Node dependencies and build assets
 RUN npm ci --production=false && npm run production && npm cache clean --force
