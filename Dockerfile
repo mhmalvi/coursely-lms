@@ -38,8 +38,9 @@ RUN mkdir -p /var/www/html/storage/logs \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Install PHP dependencies (ignore platform requirements for Docker environment)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=ext-gmp
+# Configure Git for Composer and install PHP dependencies
+RUN git config --global url."https://".insteadOf git:// && \
+    composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist
 
 # Install Node dependencies and build assets
 RUN npm ci --production=false && npm run production && npm cache clean --force
