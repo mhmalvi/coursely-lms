@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     nodejs \
     npm \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -27,27 +28,23 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+# Create necessary directories and set permissions
+RUN mkdir -p /var/www/html/storage/logs \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Install Node dependencies and build assets
-RUN npm ci --production=false && npm run production
+RUN npm ci --production=false && npm run production && npm cache clean --force
 
-# Generate Laravel application key
-RUN php artisan key:generate --force
-
-# Create storage link
-RUN php artisan storage:link
-
-# Cache Laravel configuration
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
+# Set final permissions
+RUN chown -R www-data:www-data /var/www/html
 
 # Configure Apache
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
@@ -55,5 +52,13 @@ COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Create entrypoint script
+RUN echo '#!/bin/bash\n\
+php artisan migrate --force\n\
+php artisan config:cache\n\
+php artisan route:cache\n\
+php artisan view:cache\n\
+apache2-foreground' > /entrypoint.sh && chmod +x /entrypoint.sh
+
+# Start with entrypoint
+CMD ["/entrypoint.sh"]
