@@ -1,24 +1,11 @@
 services:
   - type: web
     name: coursely-lms
-    env: php
-    runtime: php
+    env: docker
     plan: starter
     region: oregon
-    buildCommand: |
-      php -v
-      composer install --no-dev --optimize-autoloader --no-interaction
-      php artisan key:generate --force
-      npm ci --production=false
-      npm run production
-      php artisan storage:link
-      php artisan config:cache
-      php artisan route:cache
-      php artisan view:cache
-    startCommand: |
-      php artisan migrate --force
-      php artisan config:clear
-      php -S 0.0.0.0:$PORT -t public
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./
     healthCheckPath: /
     envVars:
       - key: APP_NAME
