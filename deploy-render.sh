@@ -3,18 +3,28 @@
 # Coursely LMS Render Deployment Script
 echo "🚀 Starting Coursely LMS deployment to Render..."
 
+# Load environment variables
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
+fi
+
+# Check if Render API key is set
+if [ -z "$RENDER_API_KEY" ]; then
+    echo "❌ RENDER_API_KEY not found in .env file"
+    exit 1
+fi
+
+# Export Render API key for CLI
+export RENDER_API_KEY=$RENDER_API_KEY
+
 # Check if Render CLI is installed
 if ! command -v render &> /dev/null; then
     echo "❌ Render CLI not found. Installing..."
     npm install -g @render/cli
 fi
 
-# Check if logged in to Render
-echo "📋 Checking Render authentication..."
-if ! render auth whoami &> /dev/null; then
-    echo "🔑 Please log in to Render:"
-    render auth login
-fi
+# Verify authentication with API key
+echo "📋 Verifying Render authentication with API key..."
 
 # Validate render.yaml
 echo "🔍 Validating render.yaml configuration..."
