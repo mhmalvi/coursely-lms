@@ -1,6 +1,9 @@
 # Use PHP 7.4 with Apache (compatible with Laravel requirements)
 FROM php:7.4-apache
 
+# Build argument for GitHub token (optional)
+ARG GITHUB_TOKEN=""
+
 # Set working directory
 WORKDIR /var/www/html
 
@@ -40,6 +43,12 @@ RUN mkdir -p /var/www/html/storage/logs \
 
 # Configure Git for Composer and install PHP dependencies
 RUN git config --global url."https://".insteadOf git:// && \
+    git config --global http.sslVerify false && \
+    composer config --global github-protocols https ssh && \
+    if [ -n "$GITHUB_TOKEN" ]; then \
+        composer config --global github-oauth.github.com $GITHUB_TOKEN; \
+    fi && \
+    composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist --no-plugins || \
     composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist
 
 # Install Node dependencies and build assets
