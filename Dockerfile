@@ -48,7 +48,8 @@ RUN git config --global url."https://".insteadOf git:// && \
     if [ -n "$GITHUB_TOKEN" ]; then \
         composer config --global github-oauth.github.com $GITHUB_TOKEN; \
     fi && \
-    composer update --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist
+    (composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist || \
+     composer update --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --prefer-dist)
 
 # Install Node dependencies and build assets
 RUN npm ci --production=false && npm run production && npm cache clean --force
