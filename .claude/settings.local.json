@@ -37,7 +37,9 @@
       "mcp__supabase__pause_project",
       "mcp__supabase__execute_sql",
       "Bash(git reset:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(chmod:*)",
+      "Bash(./deploy-render.sh)"
     ],
     "deny": [],
     "ask": []
