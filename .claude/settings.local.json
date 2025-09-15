@@ -40,7 +40,8 @@
       "Bash(git rm:*)",
       "Bash(chmod:*)",
       "Bash(./deploy-render.sh)",
-      "Bash(composer --version)"
+      "Bash(composer --version)",
+      "mcp__sequential-thinking__sequentialthinking"
     ],
     "deny": [],
     "ask": []

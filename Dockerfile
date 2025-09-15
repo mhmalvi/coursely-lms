@@ -48,7 +48,7 @@ RUN git config --global url."https://".insteadOf git:// && \
     if [ -n "$GITHUB_TOKEN" ]; then \
         composer config --global github-oauth.github.com $GITHUB_TOKEN; \
     fi && \
-    composer install --no-dev --no-autoloader --no-interaction --ignore-platform-reqs --prefer-dist && \
+    composer update --no-dev --no-autoloader --no-interaction --ignore-platform-reqs --prefer-dist && \
     composer dump-autoload --optimize --no-dev
 
 # Install Node dependencies and build assets
