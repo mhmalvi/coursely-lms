@@ -41,7 +41,7 @@
         "lyracom/rest-php-sdk": "4.0.*",
         "maatwebsite/excel": "^3.1",
         "macsidigital/laravel-zoom": "^5.0",
-        "melhorenvio/mercadopago-dx-php-laravel": "^1.2",
+        "mercadopago/dx-php": "^2.6",
         "mews/captcha": "^3.2",
         "mews/purifier": "^3.3",
         "midtrans/midtrans-php": "^2.3",
