@@ -7,10 +7,9 @@ use App\Models\PaymentChannel;
 use App\PaymentChannels\BasePaymentChannel;
 use App\PaymentChannels\IChannel;
 use Illuminate\Http\Request;
-use MercadoPago\SDK as Mercado;
-use MercadoPago\Preference as MercadoPreference;
-use MercadoPago\Item as MercadoItem;
-use MercadoPago\Payer as MercadoPagoPayer;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Resources\Preference\Preference as MercadoPreference;
 
 class Channel extends BasePaymentChannel implements IChannel
 {
@@ -41,45 +40,45 @@ class Channel extends BasePaymentChannel implements IChannel
     {
         $user = $order->user;
 
-        Mercado::setAccessToken($this->access_token);
-
-        $payer = new MercadoPagoPayer();
-        $payer->name = $user->full_name;
-        $payer->email = $user->email;
-        $payer->phone = array(
-            "area_code" => "",
-            "number" => $user->mobile
-        );
+        // Configure MercadoPago SDK v3
+        MercadoPagoConfig::setAccessToken($this->access_token);
 
         $orderItems = $order->orderItems;
 
         $items = [];
         foreach ($orderItems as $orderItem) {
-            $item = new MercadoItem();
-
-            $item->id = $orderItem->id;
-            $item->title = "item " . $orderItem->id;
-            $item->quantity = 1;
-            $item->unit_price = $this->makeAmountByCurrency($orderItem->total_amount, $this->currency);
-            $item->currency_id = $this->currency;
-
-            $items[] = $item;
+            $items[] = [
+                "id" => (string)$orderItem->id,
+                "title" => "item " . $orderItem->id,
+                "quantity" => 1,
+                "unit_price" => (float)$this->makeAmountByCurrency($orderItem->total_amount, $this->currency),
+                "currency_id" => $this->currency,
+            ];
         }
 
-        $preference = new MercadoPreference();
-        $preference->items = $items;
-        $preference->payer = $payer;
-        $preference->back_urls = $this->makeCallbackUrl($order);
-        $preference->auto_return = "approved";
+        $preferenceData = [
+            "items" => $items,
+            "payer" => [
+                "name" => $user->full_name,
+                "email" => $user->email,
+                "phone" => [
+                    "area_code" => "",
+                    "number" => $user->mobile
+                ]
+            ],
+            "back_urls" => $this->makeCallbackUrl($order),
+            "auto_return" => "approved"
+        ];
 
-        /*$preference->payment_methods = array(
-            "excluded_payment_types" => array(
-                array("id" => "credit_card")
-            ),
+        /*$preferenceData["payment_methods"] = [
+            "excluded_payment_types" => [
+                ["id" => "credit_card"]
+            ],
             "installments" => 12
-        );*/
+        ];*/
 
-        $preference->save();
+        $client = new PreferenceClient();
+        $preference = $client->create($preferenceData);
 
         session()->put($this->order_session_key, $order->id);
 
