@@ -63,10 +63,21 @@ claude mcp add image-gen -- npx -y @modelcontextprotocol/server-images
 ```
 
 ### Deployment Options for Coursely LMS
-```bash
-# Vercel - Modern PHP hosting (Available but not currently working)
-# claude mcp add vercel --scope user -- npx -y @vercel/mcp-server
 
+#### Render Deployment (Current Platform)
+```bash
+# Render MCP Server - NOTE: Currently not available as NPM package
+# The official Render MCP is hosted at https://mcp.render.com/mcp
+# Configuration requires manual setup in ~/.claude.json
+# API Key configured: rnd_ffgurx6t9h9NIhBAzVCk5hylEBld
+
+# For now, use Render API directly via REST calls or dashboard
+# Deploy URL: https://coursely-lms.onrender.com
+# Dashboard: https://dashboard.render.com/web/srv-d309qqt6ubrc73em7te0
+```
+
+#### Alternative Deployment Platforms
+```bash
 # Traditional PHP/Laravel hosting
 claude mcp add digitalocean --scope user -e DIGITALOCEAN_API_TOKEN=YOUR_TOKEN -- npx -y @digitalocean/mcp
 claude mcp add netlify --scope user -e NETLIFY_AUTH_TOKEN=YOUR_TOKEN -- npx -y @netlify/mcp
@@ -284,9 +295,12 @@ claude mcp github create-pr --title "Modern UI Enhancement Phase 1"
 - ✅ Memory MCP
 - ✅ Context7 MCP
 
-**Available for Installation (Not Currently Working):**
-- ⚠️ Vercel MCP Server (connection issues, server may not be available yet)
+**Deployment Platform:**
+- ⚠️ Render MCP Server (Not available as NPM package - use REST API or Dashboard)
+- ✅ Render API Key Configured: `rnd_ffgurx6t9h9NIhBAzVCk5hylEBld`
+- 🌐 Live URL: https://coursely-lms.onrender.com
+- 📊 Dashboard: https://dashboard.render.com/web/srv-d309qqt6ubrc73em7te0
 
-**Installation Location:** `C:\Users\d_rak\OneDrive\Desktop\codecanyon-VkTrkpsL-rocket-lms-learning-managem\Source\Source`
+**Project Location:** `E:\Aethon_draft\lms\coursely-lms`
 
 This MCP environment is now optimized specifically for Coursely LMS frontend enhancement and full-stack Laravel development with 2025's latest standards and best practices.
