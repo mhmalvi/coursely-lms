@@ -82,3 +82,8 @@ Thumbs.db
 !/storage/app/public/.gitkeep
 .vercel
 .env.vercel
+
+.env.*
+credentials.json
+serviceAccountKey.json
+.claude/
