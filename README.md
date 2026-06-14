@@ -1,6 +1,8 @@
 <!-- repo-card -->
 ![coursely-lms](docs/assets/social-card.png)
 
+![coursely-lms — architecture](docs/assets/architecture.png)
+
 # Coursely LMS
 
 > Full-featured Learning Management System — course creation, live classrooms, assessments, certifications, and multi-gateway payments with support for 30+ payment providers.
